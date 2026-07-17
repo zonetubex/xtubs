@@ -29,9 +29,9 @@ window.VidvastConfig.SHORTLINK_DOMAINS = [
         slotId: 'slot0',
         // API utama (vidy.biz.id). Jika server belum setting CORS untuk xtubs.biz.id,
         // request akan gagal di browser. Lihat laporan PDF bagian "CORS Fix".
-        api: 'https://vidy.biz.id/mas.php',
+        api: 'https://vidy.biz.id/apiku.php',
         // CORS proxy fallback (Opsional - hapus baris ini jika API server sudah set CORS dengan benar)
-        apiFallback: 'https://corsproxy.io/?url=' + encodeURIComponent('https://vidy.biz.id/mas.php'),
+        apiFallback: 'https://corsproxy.io/?url=' + encodeURIComponent('https://vidy.biz.id/apiku.php'),
         domain: 'https://tico.biz.id'
     },
     {
