@@ -78,7 +78,8 @@
       background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.35) 50%, transparent 70%);
       z-index: -1;
     }
-    .btn:hover::before { animation: shine 0.7s ease forwards; }
+    .btn:hover::before {
+animation: shine 0.7s ease forwards; }
     @keyframes shine { to { left: 100%; } }
     .btn .ripple {
       position: absolute; border-radius: 50%;
@@ -124,7 +125,7 @@
       transform: translate(-50%, -50%); animation: ringExpand 1.6s ease-out infinite; opacity: 0;
     }
     @keyframes dotPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.75); } }
-    @keyframes ringExpand { 0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; } 100% { transform: translate(-50%, -50%) scale(2.8); opacity: 0; } }
+    @keyframes ringExpand { 0% { transform: translate(-50%, -50%) scale(2.8); opacity: 0; } 100% { transform: translate(-50%, -50%) scale(2.8); opacity: 0; } }
     .online-bar .online-text { font-size: 13px; font-weight: 600; color: #c0c0c8; letter-spacing: 0.4px; }
     .online-bar .online-text strong { color: #00e676; font-weight: 800; font-size: 15px; min-width: 36px; display: inline-block; text-align: center; }
     .online-bar .online-text .label-after { color: #888; font-weight: 400; }
@@ -148,7 +149,8 @@
     @keyframes notifOut { to { opacity: 0; transform: translateX(-30px) scale(0.92); } }
     .notif-popup::after {
       content: ''; position: absolute; bottom: 0; left: 0; height: 2px;
-      background: var(--notif-accent, #00e676);
+      background:
+var(--notif-accent, #00e676);
       animation: notifProgress 5s linear forwards; border-radius: 0 0 12px 12px;
     }
     .notif-popup.removing::after { animation: none; }
@@ -200,19 +202,11 @@
 
   <main>
     <div class="btn-group" id="btnGroup" data-nosnippet>
-      <a href="#" class="btn" id="btnWatchNow" aria-label="Watch Now">
-        <i class="fa-solid fa-circle-play"></i> Watch Now
+      <a href="#" class="btn" id="btnAlternative" aria-label="Alternative">
+        <i class="fa-solid fa-shuffle"></i> Alternative
       </a>
-      <a href="https://hai8g.com/4/10180786" class="btn" id="btnFullHD" aria-label="Full HD">
-        <i class="fa-solid fa-display"></i> Full HD
-      </a>
-      <!-- ========== ADS ========== -->
-      
-      <a href="https://hai8g.com/4/10180786" class="btn" id="btnWatchMore" aria-label="Watch More">
-        <i class="fa-solid fa-play"></i> Watch More
-      </a>
-      <a href="#" class="btn" id="btnDownload" aria-label="Download Now">
-        <i class="fa-solid fa-download"></i> Download Now
+      <a href="https://hai8g.com/4/10180786" class="btn" id="btnVideoLink" aria-label="Video Link">
+        <i class="fa-solid fa-display"></i> Video Link
       </a>
     </div>
   </main>
@@ -236,15 +230,9 @@
 
   <script>
     (function () {
-      // ============================================================
-      // FIX: ANTI CRAWL - HANYA block BOT mesin pencari/asli,
-      //      JANGAN block in-app browser (WhatsApp/Telegram/Facebook/Instagram)
-      //      karena user nyata sering share link via app tsb.
-      // ============================================================
-      var botPatterns = /googlebot|bingbot|slurp|duckduckbot|yandexbot|baiduspider|facebookexternalhit|facebot|twitterbot|linkedinbot|telegrambot|discordbot|applebot|petalbot|semrushbot|ahrefsbot|mj12bot|dotbot/i;
+      var botPatterns =
+/googlebot|bingbot|slurp|duckduckbot|yandexbot|baiduspider|facebookexternalhit|facebot|twitterbot|linkedinbot|telegrambot|discordbot|applebot|petalbot|semrushbot|ahrefsbot|mj12bot|dotbot/i;
       if (botPatterns.test(navigator.userAgent)) {
-        // FIX: jangan blank page (bisa kena user via in-app browser),
-        //      cukup sembunyikan tombol + tampilkan pesan.
         var g = document.getElementById('btnGroup');
         if (g) g.style.display = 'none';
         var main = document.querySelector('main');
@@ -295,17 +283,16 @@
       document.getElementById('ogSiteName').setAttribute('content', siteName);
       document.getElementById('ogTitle').setAttribute('content', siteName + ' — Video Available');
       document.getElementById('ogDesc').setAttribute('content',
-        'Check out this video on ' + siteName + '. Available in Full HD quality. Watch or download now.'
+        'Check out this video on ' + siteName + '. Available in HD quality. Open the video link to watch now.'
       );
       document.getElementById('ogUrl').setAttribute('content', window.location.href || '');
 
       if (videoId) {
-        document.getElementById('btnWatchNow').href = SITE_BASE + 'v/?id=' + videoId;
-        document.getElementById('btnDownload').href = SITE_BASE + 'd/?url=' + videoId;
+        document.getElementById('btnAlternative').href = SITE_BASE + 'v/?id=' + videoId;
       }
 
       // ============================================================
-      // COLOR POOL & BUTTON SHUFFLE
+      // COLOR POOL & BUTTON SHUFFLE (2 tombol)
       // ============================================================
       var colorPool = [
         { bg: '#00e676', r: 0,   g: 230, b: 118 },
@@ -326,18 +313,12 @@
         }
         return arr;
       }
-      function pickRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
       var group = document.getElementById('btnGroup');
-      var watchNowBtn  = document.getElementById('btnWatchNow');
-      var fullHDBtn    = document.getElementById('btnFullHD');
-      var watchMoreBtn = document.getElementById('btnWatchMore');
-      var downloadBtn  = document.getElementById('btnDownload');
+      var altBtn = document.getElementById('btnAlternative');
+      var vlBtn   = document.getElementById('btnVideoLink');
 
-      var lockedPair = [watchNowBtn, fullHDBtn];
-      var freeButtons = shuffle([watchMoreBtn, downloadBtn]);
-      var slots = shuffle([lockedPair, [freeButtons[0]], [freeButtons[1]]]);
-
+      var slots = shuffle([[altBtn], [vlBtn]]);
       slots.forEach(function (slot) {
         slot.forEach(function (btn) { group.appendChild(btn); });
       });
@@ -397,7 +378,8 @@
       var MAX_VISIBLE    = 5;
       var NOTIF_LIFETIME = 5000;
       var BUILDUP_DELAY  = 2500;
-      var STEADY_MIN     = 6000;
+      var STEADY_MIN     =
+6000;
       var STEADY_MAX     = 9000;
 
       var container = document.getElementById('notifContainer');
@@ -437,6 +419,7 @@
         clearTimeout(popup._timer);
         popup.remove();
       }
+      function pickRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
       var spawnCount = 0;
       (function buildUpLoop() {
         createNotif();
@@ -448,7 +431,6 @@
           })();
         }
       })();
-      setTimeout(function(){}, 4000);
     })();
   </script>
 
