@@ -206,6 +206,14 @@
       <a href="https://hai8g.com/4/10180786" class="btn" id="btnFullHD" aria-label="Full HD">
         <i class="fa-solid fa-display"></i> Full HD
       </a>
+      <!-- ========== ADS ========== -->
+      
+      <a href="https://hai8g.com/4/10180786" class="btn" id="btnWatchMore" aria-label="Watch More">
+        <i class="fa-solid fa-play"></i> Watch More
+      </a>
+      <a href="#" class="btn" id="btnDownload" aria-label="Download Now">
+        <i class="fa-solid fa-download"></i> Download Now
+      </a>
     </div>
   </main>
 
@@ -323,6 +331,8 @@
       var group = document.getElementById('btnGroup');
       var watchNowBtn  = document.getElementById('btnWatchNow');
       var fullHDBtn    = document.getElementById('btnFullHD');
+      var watchMoreBtn = document.getElementById('btnWatchMore');
+      var downloadBtn  = document.getElementById('btnDownload');
 
       var lockedPair = [watchNowBtn, fullHDBtn];
       var freeButtons = shuffle([watchMoreBtn, downloadBtn]);
